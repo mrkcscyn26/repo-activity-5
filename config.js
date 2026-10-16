@@ -1,1 +1,1 @@
-const apiUrl = 'https://api.technova.dev';
+const apiUrl = 'https://staging.technova.dev';
