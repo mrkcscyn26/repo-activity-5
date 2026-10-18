@@ -1,0 +1,55 @@
+Activity 5: Troubleshooting and Emergency Fixes
+Name: Mark Allen M. Cascayan
+
+1. Pulling a Mistakenly Staged .env File Out of the Index
+Command:
+git restore --staged .env
+Explanation: Takes .env out of the staging area so it won't be part of the next commit. The file itself is untouched in your working folder.
+
+2. Correcting a Typo in the Last Local Commit Message
+Command:
+git commit --amend -m "Fixed authentication typo"
+Explanation: Replaces the message on your latest commit rather than adding a new one. Because it rewrites that commit, only do this if it hasn't been pushed yet.
+
+3. Including a Forgotten styles.css in the Last Commit
+Commands:
+git add styles.css
+git commit --amend --no-edit
+Explanation: First, styles.css is added to the staging area. Then the amend merges it into the most recent commit, and --no-edit leaves the existing message as it was.
+
+4. Discarding Unsaved Changes to index.html
+Command:
+git restore index.html
+Explanation: Reverts index.html to its state in the last commit, wiping out any edits you haven't committed. Those edits are generally gone for good, so use it with care.
+
+5. Moving Three Local Commits off main onto a Fresh Branch
+Commands:
+git branch new-feature
+git reset HEAD~3 --hard
+git checkout new-feature
+Explanation: The new branch is created first so it holds all three commits safely. Next, main is rolled back by three commits to match the remote. Finally, you switch to new-feature and carry on from there.
+
+6. Rescuing Work Done in a Detached HEAD State
+Command:
+git switch -c recovery-branch
+Explanation: Starts a new branch from the commit you're on and moves you onto it. The commits made while detached are now attached to a branch and won't be lost when you switch elsewhere.
+
+7. Undoing a Bad Commit That Was Already Pushed
+Command:
+git revert <buggy-commit-hash>
+Explanation: Adds a new commit that cancels out the faulty one while leaving the shared history intact. Look up the real hash with git log and put it in place of the placeholder.
+
+8. Bringing Back a Deleted Branch with git reflog
+Command:
+git branch <deleted-branch-name> <commit-hash>
+Explanation: Rebuilds the deleted branch pointing at the commit where it last stood. Use git reflog to locate that hash, then fill in both placeholders.
+
+9. Recording Files Deleted Manually as Removed in Git
+Command:
+git add -u
+Explanation: Stages all modifications and deletions of files Git already tracks, so files you removed through File Explorer are included. Brand-new untracked files are left out.
+
+10. Deleting the testing-junk Branch from the Remote Repository
+Command:
+git push origin --delete testing-junk
+Explanation: Removes testing-junk from origin so teammates no longer see it. Any local branch with the same name stays in place.
